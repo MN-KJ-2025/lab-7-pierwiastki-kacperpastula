@@ -12,6 +12,9 @@ import numpy.polynomial.polynomial as nppoly
 
 
 def roots_20(coef: np.ndarray) -> tuple[np.ndarray, np.ndarray] | None:
+    coef = coef + np.random.random_sample(coef.shape) * 1e-10
+    roots = nppoly.polyroots(coef)
+    return coef,roots
     """Funkcja wyznaczająca miejsca zerowe wielomianu funkcją
     `nppoly.polyroots()`, najpierw lekko zaburzając wejściowe współczynniki 
     wielomianu (N(0,1) * 1e-10).
