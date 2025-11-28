@@ -32,7 +32,15 @@ def roots_20(coef: np.ndarray) -> tuple[np.ndarray, np.ndarray] | None:
 
 
 def frob_a(coef: np.ndarray) -> np.ndarray | None:
-    
+    if not isinstance(coef, np.ndarray) or coef.ndim != 1 or coef[0] == 0 or len(coef) < 2:
+        return None
+    coef_rev = np.delete(coef[::-1],-1)
+    eye = np.eye(len(coef)-2)
+    zeros = np.zeros((len(coef)-2,1))
+    zeros_eye = np.concatenate((zeros,eye),axis=1)
+    coef_row = coef_rev.reshape(1,-1)
+    F = np.concatenate((zeros_eye,-coef_row/coef[0]),axis=0)
+    return F
     """Funkcja służąca do wyznaczenia macierzy Frobeniusa na podstawie
     współczynników jej wielomianu charakterystycznego:
     w(x) = a_n*x^n + a_{n-1}*x^{n-1} + ... + a_2*x^2 + a_1*x + a_0
