@@ -32,6 +32,7 @@ def roots_20(coef: np.ndarray) -> tuple[np.ndarray, np.ndarray] | None:
 
 
 def frob_a(coef: np.ndarray) -> np.ndarray | None:
+    
     """Funkcja służąca do wyznaczenia macierzy Frobeniusa na podstawie
     współczynników jej wielomianu charakterystycznego:
     w(x) = a_n*x^n + a_{n-1}*x^{n-1} + ... + a_2*x^2 + a_1*x + a_0
