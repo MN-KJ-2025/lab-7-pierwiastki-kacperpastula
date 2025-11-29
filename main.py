@@ -9,10 +9,11 @@
 # =============================================================================
 import numpy as np
 import numpy.polynomial.polynomial as nppoly
-
+import sys
 
 def roots_20(coef: np.ndarray) -> tuple[np.ndarray, np.ndarray] | None:
-    
+    if not isinstance(coef, np.ndarray):
+        return None
     coef = coef + np.random.random_sample(coef.shape) * 1e-10
     roots = nppoly.polyroots(coef)
     return coef,roots
@@ -65,6 +66,11 @@ def frob_a(coef: np.ndarray) -> np.ndarray | None:
 
 
 def is_nonsingular(A: np.ndarray) -> bool | None:
+    if not isinstance(A, np.ndarray) or A.ndim != 2 or A.shape[0] != A.shape[1]:
+        return None
+    
+    return abs(np.linalg.det(A)) >= sys.float_info.epsilon
+    
     """Funkcja sprawdzająca czy podana macierz NIE JEST singularna. Przy
     implementacji należy pamiętać o definicji zera maszynowego.
 
